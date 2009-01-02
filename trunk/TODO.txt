@@ -1,0 +1,10 @@
+FEATURES
+========
+
+Have a dropdown menu to select the type of GraphViz graph that gets automatically generated
+
+
+BUGS
+=======
+
+Sometimes the "motion_event" callback gets called before the "draw_scale" varible gets assigned a value
