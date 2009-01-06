@@ -169,6 +169,46 @@ class NetworkGraphDisplay(gtk.Window):
 		self.hover_proximity = xml_tree.get_widget( "radiobutton4" )
 
 
+
+
+
+
+		b1 = xml_tree.get_widget( "hbox1" )
+
+		layout_possibilities = ["circular_layout", "random_layout", "shell_layout", "spring_layout", "spectral_layout"]
+
+		cell = gtk.CellRendererText()
+		cell.props.ellipsize = pango.ELLIPSIZE_END
+		ls = gtk.ListStore( str )
+		for x in layout_possibilities:
+			ls.append( [x] )
+		cb1 = gtk.ComboBox( ls )
+		cb1.pack_start( cell, True )
+		b1.pack_start(cb1, True, True)
+
+
+		'''
+		b2 = xml_tree.get_widget( "hbox5" )
+
+		graph_possibilities = ["fast_gnp_random_graph", "gnp_random_graph", "dense_gnm_random_graph", "gnm_random_graph", "erdos_renyi_graph", "binomial_graph", "newman_watts_strogatz_graph", "watts_strogatz_graph", "random_regular_graph", "barabasi_albert_graph", "powerlaw_cluster_graph", "random_lobster", "random_shell_graph", "random_powerlaw_tree", "random_powerlaw_tree_sequence"]
+
+		cell = gtk.CellRendererText()
+		cell.props.ellipsize = pango.ELLIPSIZE_END
+		ls = gtk.ListStore( object )
+		for x in graph_possibilities:
+			ls.append( [x] )
+		cb2 = gtk.ComboBox( ls )
+		cb2.pack_start( cell, True )
+		b2.pack_start(cb2, True, True)
+		'''
+
+
+
+
+
+
+
+
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		self.show_all()
 
