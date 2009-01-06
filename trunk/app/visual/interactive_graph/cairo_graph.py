@@ -363,14 +363,6 @@ class CairoGraph(gtk.DrawingArea, CairoUtils):
 			else:
 				active_from, active_to = -1, -1
 
-			if (int(active_from), int(active_to)) == (network_segment.from_node_id, network_segment.to_node_id)\
-			or (int(active_to), int(active_from)) == (network_segment.from_node_id, network_segment.to_node_id):
-				self.color_with_alpha(cr, "red", 1.0)
-			else:
-				self.color_with_alpha(cr, "black", 1.0)
-
-
-
 			cr.move_to( *self.node_positions_by_label[ network_segment.from_node_id ] )
 			cr.line_to( *self.node_positions_by_label[ network_segment.to_node_id ] )
 
@@ -382,7 +374,15 @@ class CairoGraph(gtk.DrawingArea, CairoUtils):
 					cr.set_line_width(2*self.stroke_width)
 					cr.stroke_preserve()
 
-			self.color_with_alpha(cr, "black", 1.0)
+
+			if (int(active_from), int(active_to)) == (network_segment.from_node_id, network_segment.to_node_id)\
+			or (int(active_to), int(active_from)) == (network_segment.from_node_id, network_segment.to_node_id):
+				self.color_with_alpha(cr, "red", 1.0)
+			else:
+				self.color_with_alpha(cr, "black", 1.0)
+
+
+
 			cr.set_line_width(self.stroke_width)
 			cr.stroke()
 

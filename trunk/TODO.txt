@@ -3,6 +3,10 @@ FEATURES
 
 Have a dropdown menu to select the type of GraphViz graph that gets automatically generated
 
+Implement "Zoom" with feathered canvas borders
+
+Create four variants of spiky node overlays
+
 
 BUGS
 =======

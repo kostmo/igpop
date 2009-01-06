@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Fri Jan  2 02:56:49 2009 -->
+<!--Generated with glade3 3.4.5 on Tue Jan  6 02:12:54 2009 -->
 <glade-interface>
   <widget class="GtkWindow" id="surrogate_window">
     <child>
@@ -121,6 +121,66 @@
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">_View</property>
                 <property name="use_underline">True</property>
+                <child>
+                  <widget class="GtkMenu" id="menu4">
+                    <property name="visible">True</property>
+                    <child>
+                      <widget class="GtkCheckMenuItem" id="menuitem1">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">_Feather edges</property>
+                        <property name="use_underline">True</property>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkCheckMenuItem" id="menuitem3">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Show _joints</property>
+                        <property name="use_underline">True</property>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="menuitem4">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">_Save screenshot</property>
+                        <property name="use_underline">True</property>
+                        <signal name="activate" handler="cb_screenshot"/>
+                        <child internal-child="image">
+                          <widget class="GtkImage" id="menu-item-image1">
+                            <property name="stock">gtk-orientation-portrait</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem2">
+                        <property name="visible">True</property>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkCheckMenuItem" id="menuitem6">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Auto-refresh</property>
+                        <property name="use_underline">True</property>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkCheckMenuItem" id="menuitem7">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Animate transitions</property>
+                        <property name="use_underline">True</property>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="menuitem2">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">gtk-refresh</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="cb_rearrange"/>
+                      </widget>
+                    </child>
+                  </widget>
+                </child>
               </widget>
             </child>
             <child>
@@ -138,6 +198,14 @@
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <signal name="activate" handler="cb_about"/>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="imagemenuitem11">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">gtk-info</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
                       </widget>
                     </child>
                   </widget>
@@ -160,15 +228,19 @@
                   <widget class="GtkNotebook" id="notebook2">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="border_width">3</property>
                     <child>
                       <widget class="GtkHBox" id="hbox2">
                         <property name="visible">True</property>
+                        <property name="border_width">3</property>
+                        <property name="spacing">3</property>
                         <child>
                           <widget class="GtkVBox" id="vbox2">
                             <property name="visible">True</property>
                             <child>
                               <widget class="GtkVButtonBox" id="vbuttonbox1">
                                 <property name="visible">True</property>
+                                <property name="spacing">3</property>
                                 <child>
                                   <widget class="GtkButton" id="button4">
                                     <property name="visible">True</property>
@@ -199,6 +271,52 @@
                                   </packing>
                                 </child>
                                 <child>
+                                  <widget class="GtkHBox" id="hbox5">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">5</property>
+                                    <child>
+                                      <widget class="GtkLabel" id="label2">
+                                        <property name="visible">True</property>
+                                        <property name="label" translatable="yes">Graph type:</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <placeholder/>
+                                    </child>
+                                  </widget>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkHBox" id="hbox1">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">5</property>
+                                    <child>
+                                      <widget class="GtkLabel" id="label1">
+                                        <property name="visible">True</property>
+                                        <property name="label" translatable="yes">Layout:</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <placeholder/>
+                                    </child>
+                                  </widget>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">3</property>
+                                  </packing>
+                                </child>
+                                <child>
                                   <widget class="GtkButton" id="button1">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -209,7 +327,7 @@
                                   </widget>
                                   <packing>
                                     <property name="fill">False</property>
-                                    <property name="position">2</property>
+                                    <property name="position">4</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -223,35 +341,6 @@
                                   </widget>
                                   <packing>
                                     <property name="fill">False</property>
-                                    <property name="position">3</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <widget class="GtkButton" id="button3">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="label" translatable="yes">gtk-orientation-portrait</property>
-                                    <property name="use_stock">True</property>
-                                    <property name="response_id">0</property>
-                                    <signal name="clicked" handler="cb_screenshot"/>
-                                  </widget>
-                                  <packing>
-                                    <property name="fill">False</property>
-                                    <property name="position">4</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <widget class="GtkButton" id="button5">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="label" translatable="yes">gtk-refresh</property>
-                                    <property name="use_stock">True</property>
-                                    <property name="response_id">0</property>
-                                    <signal name="clicked" handler="cb_rearrange"/>
-                                  </widget>
-                                  <packing>
                                     <property name="position">5</property>
                                   </packing>
                                 </child>
