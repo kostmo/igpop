@@ -78,6 +78,10 @@ class NetworkGraphDisplay(gtk.Window):
 			"cb_save":			self.cb_set_file_name,
 			"cb_quit":			self.end_program,
 
+			# View menu:
+			"cb_conditional_graph_update":	self.cb_conditional_graph_update,
+			"cb_update_graph":	self.cb_update_graph,
+
 			# Help menu:
 			"cb_about":			self.cb_about,
 
@@ -168,6 +172,8 @@ class NetworkGraphDisplay(gtk.Window):
 		self.selection_mode = xml_tree.get_widget( "radiobutton2" )
 		self.hover_proximity = xml_tree.get_widget( "radiobutton4" )
 
+		self.nubs_enabled_checkbox = xml_tree.get_widget( "nubs_enabled_checkbox" )
+		self.auto_update_checkbox = xml_tree.get_widget( "auto_update_checkbox" )
 
 
 
@@ -212,6 +218,19 @@ class NetworkGraphDisplay(gtk.Window):
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		self.show_all()
 
+
+	# ---------------------------------------
+
+	def cb_conditional_graph_update(self, widget):
+
+		if self.auto_update_checkbox.get_active():
+			self.cb_rearrange(widget)
+
+	# ---------------------------------------
+
+	def cb_update_graph(self, widget):
+
+		self.cairograph.queue_draw()
 
 	# ---------------------------------------
 
