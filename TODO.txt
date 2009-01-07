@@ -1,6 +1,12 @@
 FEATURES
 ========
 
+For overlong active text in a ComboBox, how do I...
+1) Make it use ellipsis only when not popped up
+and
+2) Show a tooltip of the selected item?
+
+
 Have a dropdown menu to select the type of GraphViz graph that gets automatically generated
 
 Implement "Zoom" with feathered canvas borders
