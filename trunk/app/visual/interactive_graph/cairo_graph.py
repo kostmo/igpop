@@ -180,11 +180,6 @@ class CairoGraph(gtk.DrawingArea, CairoUtils):
 					print "Deleted the atom on deck..."
 					self.gui_link.node_adding_button.set_active(False)
 
-					self.collection_reference.B.layout()
-					self.regen_points( self.collection_reference )
-
-
-
 
 			elif self.gui_link.node_removing_button.get_active():
 				if self.gui_active_node_id != None:
@@ -224,6 +219,13 @@ class CairoGraph(gtk.DrawingArea, CairoUtils):
 						self.last_mouse_coords = (x, y)
 				else:
 					self.edge_adding_start_node = None
+
+
+
+
+		if self.gui_link.auto_update_checkbox.get_active():
+			self.gui_link.cb_rearrange(self)
+
 
 		widget.queue_draw()
 
@@ -527,7 +529,9 @@ class CairoGraph(gtk.DrawingArea, CairoUtils):
 		self.mark_leaf_nodes(cr, graph_reference)
 
 		# Draw the ports
-		self.draw_port_nubs(cr, graph_reference)
+		if self.gui_link.nubs_enabled_checkbox.get_active():
+			self.draw_port_nubs(cr, graph_reference)
+
 
 		# Draw the atoms
 		self.draw_graph_nodes(cr)
