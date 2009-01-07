@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Wed Jan  7 00:33:17 2009 -->
+<!--Generated with glade3 3.4.5 on Wed Jan  7 02:09:12 2009 -->
 <glade-interface>
   <widget class="GtkWindow" id="surrogate_window">
     <child>
@@ -284,7 +284,14 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <placeholder/>
+                                  <widget class="GtkComboBox" id="combobox2">
+                                    <property name="width_request">150</property>
+                                    <property name="visible">True</property>
+                                    <property name="items" translatable="yes"></property>
+                                  </widget>
+                                  <packing>
+                                    <property name="position">1</property>
+                                  </packing>
                                 </child>
                               </widget>
                               <packing>
@@ -309,7 +316,13 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <placeholder/>
+                                  <widget class="GtkComboBox" id="combobox1">
+                                    <property name="visible">True</property>
+                                    <property name="items" translatable="yes"></property>
+                                  </widget>
+                                  <packing>
+                                    <property name="position">1</property>
+                                  </packing>
                                 </child>
                               </widget>
                               <packing>

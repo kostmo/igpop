@@ -179,12 +179,37 @@ class NetworkGraphDisplay(gtk.Window):
 
 
 
+
+
+		cb1 = xml_tree.get_widget( "combobox1" )
+		layout_possibilities = ["circular", "random", "shell", "spring", "spectral"]
+		for x in layout_possibilities:
+			cb1.append_text( x )
+
+
+
+
+		cb2 = xml_tree.get_widget( "combobox2" )
+		graph_possibilities = ["fast gnp random graph", "gnp random graph", "dense gnm random graph", "gnm random graph", "erdos renyi graph", "binomial graph", "newman watts strogatz graph", "watts strogatz graph", "random regular graph", "barabasi albert graph", "powerlaw cluster graph", "random lobster", "random shell graph", "random powerlaw tree", "random powerlaw tree sequence"]
+		for x in graph_possibilities:
+			cb2.append_text( x )
+
+
+
+		layout = cb2.get_children()[0]
+		only_cell = layout.get_cells()[0]
+#		only_cell.set_fixed_size(-1, -1)	# This does nothing.
+
+#		only_cell.props.ellipsize = pango.ELLIPSIZE_END
+
+		'''
+
 		b1 = xml_tree.get_widget( "hbox1" )
 
-		layout_possibilities = ["circular_layout", "random_layout", "shell_layout", "spring_layout", "spectral_layout"]
+
 
 		cell = gtk.CellRendererText()
-		cell.props.ellipsize = pango.ELLIPSIZE_END
+		cell
 		ls = gtk.ListStore( str )
 		for x in layout_possibilities:
 			ls.append( [x] )
@@ -193,10 +218,10 @@ class NetworkGraphDisplay(gtk.Window):
 		b1.pack_start(cb1, True, True)
 
 
-		'''
+
 		b2 = xml_tree.get_widget( "hbox5" )
 
-		graph_possibilities = ["fast_gnp_random_graph", "gnp_random_graph", "dense_gnm_random_graph", "gnm_random_graph", "erdos_renyi_graph", "binomial_graph", "newman_watts_strogatz_graph", "watts_strogatz_graph", "random_regular_graph", "barabasi_albert_graph", "powerlaw_cluster_graph", "random_lobster", "random_shell_graph", "random_powerlaw_tree", "random_powerlaw_tree_sequence"]
+
 
 		cell = gtk.CellRendererText()
 		cell.props.ellipsize = pango.ELLIPSIZE_END
