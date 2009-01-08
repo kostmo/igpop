@@ -161,14 +161,25 @@ class CairoGraph(gtk.DrawingArea, CairoUtils):
 		# LEFT MOUSE BUTTON
 		if event.button == 1:
 
+
+			# Check for modifier keys...
+			from gtk.gdk import CONTROL_MASK
+			if event.state & CONTROL_MASK:
+				print "Drag selection starting..."
+
+
+
+
+
+
+
+
+
 			atom_ref = self.collection_reference.atom_on_deck
 			if atom_ref != None:
 				
-				print "About to add", atom_ref.id
-
 				if self.gui_active_node_id != None:
 					
-					print "Attaching to node", self.gui_active_node_id
 
 					self.collection_reference.instantiated_nodes.append( atom_ref )
 					self.collection_reference.B.add_node( atom_ref.id )					
@@ -177,8 +188,12 @@ class CairoGraph(gtk.DrawingArea, CairoUtils):
 					self.gui_link.node_pool.post_removal_node_regeneration(edge, True)
 
 					self.collection_reference.atom_on_deck = None	# atom_ref
-					print "Deleted the atom on deck..."
 					self.gui_link.node_adding_button.set_active(False)
+
+
+					self.node_positions_by_label[atom_ref.id] = self.transform_point_inverse( (event.x, event.y) )
+					self.node_reference_by_label[atom_ref.id] = atom_ref
+					self.node_colors_by_label[atom_ref.id] = self.collection_reference.named_color[ atom_ref.atom_type ]
 
 
 			elif self.gui_link.node_removing_button.get_active():
@@ -255,6 +270,19 @@ class CairoGraph(gtk.DrawingArea, CairoUtils):
 		transformed_point = self.vector_add( point, self.vector_scale(self.upper_left, -1) )
 		transformed_point = self.vector_scale( transformed_point, self.draw_scale )
 		transformed_point = self.vector_add( transformed_point, ((width - self.draw_scale*self.original_width)/2.0, (height - self.draw_scale*self.original_height)/2.0) )
+		return transformed_point
+
+	# -------------
+
+	def transform_point_inverse(self, point):
+		'''Transforms the point coordinates using the inverse matrix as the drawing transform'''
+
+		width, height = self.window.get_size()
+
+		transformed_point = self.vector_add( point, (-(width - self.draw_scale*self.original_width)/2.0, -(height - self.draw_scale*self.original_height)/2.0) )
+		transformed_point = self.vector_scale( transformed_point, 1.0/self.draw_scale )
+		transformed_point = self.vector_add( transformed_point, self.upper_left )
+
 		return transformed_point
 
 	# -------------

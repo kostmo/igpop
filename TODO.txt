@@ -18,11 +18,11 @@ Create four variants of spiky node overlays
 Derive animation from "point_joiner.py"
 
 
-
-
 Make the entire "Window" sensitive to a keypress.
 Make the canvas "Widget" change the cursor depending on the keypress value.
 
+
+Implement "rubber-banding" selection
 
 
 BUGS

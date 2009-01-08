@@ -158,7 +158,7 @@ class NodePool:
 
 
 			self.atom_on_deck = BasicNode(self, node_id, atom_type)
-			print "Created an atom for the deck..."
+
 		else:
 			self.atom_on_deck = None
 

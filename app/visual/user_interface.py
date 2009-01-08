@@ -58,6 +58,15 @@ class NetworkGraphDisplay(gtk.Window):
 		gtk.Window.__init__(self)
 
 
+
+		self.connect("key-release-event", self.cb_key_release)
+		self.connect("key-press-event", self.cb_key_press)
+		self.connect("focus-out-event", self.cb_focus_out)	# EXPERIMENTAL
+
+
+		self.multi_select_modifier_down = False
+
+
 		self.animation_enabled = False
 
 
@@ -90,7 +99,7 @@ class NetworkGraphDisplay(gtk.Window):
 			"cb_rearrange":		self.cb_rearrange,
 			"cb_screenshot":	self.cb_screenshot,
 			"cb_remove_node":	self.cb_remove_node,
-			"cb_add_node":	self.cb_add_node,
+			"cb_add_node":		self.cb_add_node,
 
 		}
 
@@ -338,7 +347,39 @@ class NetworkGraphDisplay(gtk.Window):
 		my_iter2 = treestore2.iter_next(my_iter2)
 		my_iter2 = treestore2.iter_next(my_iter2)
 		treestore2.set_value(my_iter2, 1, leaf_count)
-		
+
+
+	# ---------------------------------------
+
+	def cb_focus_out(self, widget, event):
+		# Since we can't observe whether the user releases the key when our window lacks focus,
+		# we just force the key to be released, to avoid a "stuck-on" state.
+
+		self.cairograph.window.set_cursor(None)
+
+	# ---------------------------------------
+
+	def cb_key_press(self, widget, event):
+		print "Key pressed"
+		self.multi_select_modifier_down = True
+
+		from gtk.gdk import CONTROL_MASK, SHIFT_MASK
+#		if event.state & (CONTROL_MASK | SHIFT_MASK):	# This does the same thing as the next line!
+		if event.state & CONTROL_MASK:
+			c = gtk.gdk.Cursor(gtk.gdk.CROSSHAIR)
+			self.cairograph.window.set_cursor(c)
+
+	# ---------------------------------------
+
+	def cb_key_release(self, widget, event):
+		print "Key released"
+		self.multi_select_modifier_down = False
+
+
+		from gtk.gdk import CONTROL_MASK
+		if event.state & CONTROL_MASK:
+			self.cairograph.window.set_cursor(None)
+
 	# ---------------------------------------
 
 	def cb_rearrange(self, widget):
@@ -346,13 +387,10 @@ class NetworkGraphDisplay(gtk.Window):
 		self.cairograph.regen_points( self.node_pool )
 		self.cairograph.queue_draw()
 
-
-
 	# ---------------------------------------
 
 	def cb_add_node(self, widget):
 
-		# FIXME?
 		self.node_pool.cb_add_node(widget)
 
 	# ---------------------------------------
@@ -438,8 +476,6 @@ class NetworkGraphDisplay(gtk.Window):
 		file_filter.add_pattern("*")
 		file_filter.set_name("All files")
 		f.add_filter(file_filter)
-
-		f.set_current_name("untitled.graph")
 
 		response = f.run()
 		filename = f.get_filename()
