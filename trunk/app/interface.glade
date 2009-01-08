@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Wed Jan  7 22:36:14 2009 -->
+<!--Generated with glade3 3.4.5 on Thu Jan  8 02:43:05 2009 -->
 <glade-interface>
   <widget class="GtkWindow" id="surrogate_window">
     <child>
@@ -342,6 +342,7 @@
                                 <property name="label" translatable="yes">gtk-add</property>
                                 <property name="use_stock">True</property>
                                 <property name="response_id">0</property>
+                                <signal name="toggled" handler="cb_add_node"/>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
