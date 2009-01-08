@@ -137,8 +137,6 @@ class NodePool:
 			self.B.add_edge(4, 6)
 			self.B.add_edge(3, 6)
 
-
-		self.B.layout()
 		self.instantiate_atoms()
 
 	# ---------------------------------------

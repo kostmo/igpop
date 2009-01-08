@@ -29,8 +29,8 @@ class NetworkGraphDisplay(gtk.Window):
 		self.node_pool = NodePool(self)
 		self.node_pool.generate_new_graph()
 
-		self.cairograph.regen_points( self.node_pool )
-		self.cairograph.queue_draw()
+
+		self.cb_rearrange(widget)
 
 		self.repopulate_atom_list()
 
@@ -71,6 +71,7 @@ class NetworkGraphDisplay(gtk.Window):
 		xml_tree = gtk.glade.XML(gladefile, guts_widget_name, domain="surrogate_window")
 
 
+
 		callbacks = {
 			# File menu:
 			"cb_regenerate":	self.cb_regenerate_tree,
@@ -88,6 +89,9 @@ class NetworkGraphDisplay(gtk.Window):
 			# Buttons:
 			"cb_rearrange":		self.cb_rearrange,
 			"cb_screenshot":	self.cb_screenshot,
+			"cb_remove_node":	self.cb_remove_node,
+			"cb_add_node":	self.cb_add_node,
+
 		}
 
 		# Assign menu callbacks:
@@ -147,26 +151,6 @@ class NetworkGraphDisplay(gtk.Window):
 		workspace_hbox = xml_tree.get_widget( "workspace_hbox" )
 		workspace_hbox.pack_start(self.cairograph, True, True)
 
-		self.cb_regenerate_tree(None)
-
-
-
-
-
-
-
-		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		# FIXME
-		self.node_adding_button = gtk.ToggleButton("Add Node")
-		self.node_adding_button.connect("toggled", self.node_pool.cb_add_node)
-#		button_vbox.pack_start(self.node_adding_button, False, False)
-
-		self.node_removing_button = gtk.ToggleButton("Remove Node")
-		self.node_removing_button.connect("toggled", self.cb_remove_node)
-#		button_vbox.pack_start(self.node_removing_button, False, False)
-		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 
 
 		self.selection_mode = xml_tree.get_widget( "radiobutton2" )
@@ -180,19 +164,28 @@ class NetworkGraphDisplay(gtk.Window):
 
 
 
-
+		# Note: These are also in networkx.drawing.layout
 		cb1 = xml_tree.get_widget( "combobox1" )
-		layout_possibilities = ["circular", "random", "shell", "spring", "spectral"]
-		for x in layout_possibilities:
+#		self.layout_possibilities = ["circular", "random", "shell", "spring", "spectral"]
+
+		self.layout_possibilities = ["neato", "dot", "twopi", "circo", "fdp"]	# , "nop"
+
+		for x in self.layout_possibilities:
 			cb1.append_text( x )
 
+		cb1.set_active(0)
 
+		self.layout_selection = cb1
 
 
 		cb2 = xml_tree.get_widget( "combobox2" )
-		graph_possibilities = ["fast gnp random graph", "gnp random graph", "dense gnm random graph", "gnm random graph", "erdos renyi graph", "binomial graph", "newman watts strogatz graph", "watts strogatz graph", "random regular graph", "barabasi albert graph", "powerlaw cluster graph", "random lobster", "random shell graph", "random powerlaw tree", "random powerlaw tree sequence"]
-		for x in graph_possibilities:
+		self.graph_possibilities = ["fast_gnp_random_graph", "gnp_random_graph", "dense_gnm_random_graph", "gnm_random_graph", "erdos_renyi_graph", "binomial_graph", "newman_watts_strogatz_graph", "watts_strogatz_graph", "random_regular_graph", "barabasi_albert_graph", "powerlaw_cluster_graph", "random_lobster", "random_shell_graph", "random_powerlaw_tree", "random_powerlaw_tree_sequence"]
+		for x in self.graph_possibilities:
 			cb2.append_text( x )
+
+		cb2.set_active(0)
+
+		self.random_graph_selection = cb2
 
 
 
@@ -238,6 +231,10 @@ class NetworkGraphDisplay(gtk.Window):
 
 
 
+
+		self.cb_regenerate_tree(None)
+		self.node_adding_button = xml_tree.get_widget("node_add_button")
+		self.node_removing_button = xml_tree.get_widget("node_remove_button")
 
 
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -345,9 +342,18 @@ class NetworkGraphDisplay(gtk.Window):
 	# ---------------------------------------
 
 	def cb_rearrange(self, widget):
-		self.node_pool.B.layout()
+		self.node_pool.B.layout( prog=self.layout_possibilities[ self.layout_selection.get_active() ] )
 		self.cairograph.regen_points( self.node_pool )
 		self.cairograph.queue_draw()
+
+
+
+	# ---------------------------------------
+
+	def cb_add_node(self, widget):
+
+		# FIXME?
+		self.node_pool.cb_add_node(widget)
 
 	# ---------------------------------------
 

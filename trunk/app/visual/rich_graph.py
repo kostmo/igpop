@@ -141,7 +141,7 @@ class RichGraph(CairoGraph):
 			cr.stroke()
 
 		# Atom circle
-		atom_ref = self.gui_link.atom_collection.atom_on_deck
+		atom_ref = self.gui_link.node_pool.atom_on_deck
 		if atom_ref == None:
 			print "There is no atom on deck.  What the heck?"
 			return
@@ -150,7 +150,7 @@ class RichGraph(CairoGraph):
 		self.draw_simple_circle(	cr,
 						self.last_mouse_coords,
 						"black",
-						self.gui_link.atom_collection.named_color[ atom_ref.atom_type ],
+						self.gui_link.node_pool.named_color[ atom_ref.atom_type ],
 						1.0,
 						self.atom_radius)
 		cr.set_dash([])
