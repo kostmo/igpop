@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Thu Jan  8 02:43:05 2009 -->
+<!--Generated with glade3 3.4.5 on Fri Jan  9 20:50:17 2009 -->
 <glade-interface>
   <widget class="GtkWindow" id="surrogate_window">
     <child>
@@ -179,6 +179,18 @@
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <signal name="activate" handler="cb_rearrange"/>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkSeparatorMenuItem" id="menuitem3">
+                        <property name="visible">True</property>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkCheckMenuItem" id="fullscreen_menu_item">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">gtk-fullscreen</property>
+                        <property name="use_underline">True</property>
                       </widget>
                     </child>
                   </widget>
@@ -557,7 +569,32 @@
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <widget class="GtkVBox" id="workspace_vbox">
+                <property name="visible">True</property>
+                <child>
+                  <widget class="GtkToolbar" id="toolbar1">
+                    <property name="visible">True</property>
+                    <child>
+                      <widget class="GtkToggleToolButton" id="fullscreen_toolbar_item">
+                        <property name="visible">True</property>
+                        <property name="stock_id">gtk-fullscreen</property>
+                      </widget>
+                      <packing>
+                        <property name="homogeneous">True</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+              </widget>
+              <packing>
+                <property name="position">1</property>
+              </packing>
             </child>
           </widget>
           <packing>

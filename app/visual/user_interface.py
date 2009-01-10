@@ -101,11 +101,13 @@ class NetworkGraphDisplay(gtk.Window):
 			"cb_remove_node":	self.cb_remove_node,
 			"cb_add_node":		self.cb_add_node,
 
+			# Toolbar:
+#			"cb_fullscreen":	self.cb_fullscreen,
+
 		}
 
 		# Assign menu callbacks:
 		xml_tree.signal_autoconnect(callbacks)
-
 
 
 
@@ -157,8 +159,8 @@ class NetworkGraphDisplay(gtk.Window):
 
 		self.cairograph = RichGraph(self)
 		self.cairograph.set_size_request(300, 300)
-		workspace_hbox = xml_tree.get_widget( "workspace_hbox" )
-		workspace_hbox.pack_start(self.cairograph, True, True)
+		workspace_vbox = xml_tree.get_widget( "workspace_vbox" )
+		workspace_vbox.pack_start(self.cairograph, True, True)
 
 
 
@@ -246,9 +248,37 @@ class NetworkGraphDisplay(gtk.Window):
 		self.node_removing_button = xml_tree.get_widget("node_remove_button")
 
 
+
+
+
+		self.fullscreen_toggle_action = gtk.ToggleAction("fullscreen_name", "Fullscreen", "Toggle fullscreen mode", gtk.STOCK_FULLSCREEN)
+
+		self.fullscreen_toggle_action.connect_proxy( xml_tree.get_widget("fullscreen_menu_item") )
+		self.fullscreen_toggle_action.connect_proxy( xml_tree.get_widget("fullscreen_toolbar_item") )
+
+		self.fullscreen_toggle_action.connect("toggled", self.cb_fullscreen)
+
+
+
+
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		self.show_all()
 
+
+	# --------------------------------
+	def cb_fullscreen(self, widget):
+
+		if widget.get_active():
+
+			# These are only required if we want to restrict window resizing
+#			self.set_resizable( True )
+#			while gtk.events_pending():
+#				gtk.main_iteration(False)
+
+			self.fullscreen()
+		else:
+			self.unfullscreen()
+#			self.set_resizable( False )
 
 	# ---------------------------------------
 
@@ -501,15 +531,16 @@ class NetworkGraphDisplay(gtk.Window):
 	# ---------------------------------------
 
 
+
+
 def main():
 
-	gobject.threads_init()
 	display = NetworkGraphDisplay()
 	gtk.main()
 
 # ===============================
 
+
 if __name__ == "__main__":
 
 	main()
-
