@@ -250,7 +250,7 @@ class CairoGraph(gtk.DrawingArea, CairoUtils):
 
 	def leave_notify_event(self, widget, event):
 
-		print "Am I leaving?"
+#		print "Am I leaving?"
 		self.gui_active_node_id = None
 		self.active_edge = None
 
@@ -353,10 +353,6 @@ class CairoGraph(gtk.DrawingArea, CairoUtils):
 					treestore = self.gui_link.atom_props_treeview.get_model()
 					my_iter = treestore.get_iter_first()
 					treestore.set_value(my_iter, 1, -1)
-
-
-		print "FOO:", self.gui_active_node_id
-
 
 		widget.queue_draw()
 
