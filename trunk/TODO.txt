@@ -20,9 +20,14 @@ Derive animation from "point_joiner.py"
 
 Make the entire "Window" sensitive to a keypress.
 Make the canvas "Widget" change the cursor depending on the keypress value.
-
+-> gtk.gdk.DragContext() can change icons when dragging...
 
 Implement "rubber-banding" selection
+
+
+
+Here are shortcomings of the Protege graph widget:
+http://protege.stanford.edu/doc/tutorial/graph_widget/#wantedFeatures
 
 
 BUGS

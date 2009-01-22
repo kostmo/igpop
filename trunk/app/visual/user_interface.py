@@ -176,6 +176,7 @@ class NetworkGraphDisplay(gtk.Window):
 
 
 		# Note: These are also in networkx.drawing.layout
+		# see what happens when you call dir(networkx.drawing.layout)
 		cb1 = xml_tree.get_widget( "combobox1" )
 #		self.layout_possibilities = ["circular", "random", "shell", "spring", "spectral"]
 
